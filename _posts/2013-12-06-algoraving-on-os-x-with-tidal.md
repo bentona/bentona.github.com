@@ -28,16 +28,17 @@ We’re installing emacs with brew since OS X ships with a fairly dated version.
 	cabal install tidal
 
 Get the required emacs file
-
+----
 	mkdir ~/tidal && cd ~/tidal
 	wget https://raw.github.com/yaxu/Tidal/master/tidal.el
 
 Edit your ~/.emacs file to include the tidal.el file.
-
+----
 	(add-to-list 'load-path "∼/tidal")
 	(require 'tidal)
 
-Add the marmalade package repository for emacs so we can install haskell-mode for emacs.
+Add the marmalade package emacs repo
+----
 If you didn't install emacs with brew, you also need to install package.el, which I won't cover.
 This was taken from (https://github.com/haskell/haskell-mode)
 
@@ -47,26 +48,25 @@ This was taken from (https://github.com/haskell/haskell-mode)
 	(package-initialize)
 
 
-Now we install haskell-mode for emacs.
+Now we install haskell-mode for emacs. Run the following inside of emacs.
+----
+Make sure to specify the version when running emacs so the version installed with brew is started instead of OS X’s included (old) version, i.e. `emacs-24.3` instead of just `emacs`
 
-Note that we specify the version when running emacs so the version installed with brew is started instead of OS X’s included (old) version
-
-	emacs-24.3
 	M-x eval-buffer
 	M-x package-refresh-contents
-	M-x package-install \[RET\] haskell-mode
+	M-x package-install
+ 	haskell-mode
 	C-c C-x 
 
-
 Compile the dirt synthesizer.
-
+----
 	git clone https://github.com/yaxu/Dirt.git
 	cd Dirt
 	make clean; make
 
 
 Start Jack and the Dirt synthesizer that Tidal uses.
-
+----
 	jackd -d coreaudio &
 	./dirt &
 	
